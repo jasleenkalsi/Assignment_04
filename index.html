@@ -3,106 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Healthy Lifestyle Choices Survey</title>
-    
+    <title>Interactive Survey</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Healthy Lifestyle Choices Survey</h1>
-    <form id="surveyForm">
-        <!-- Name Field -->
-        <label for="name">Your Name:</label>
-        <input type="text" id="name" name="name" required>
+    <h1>Interactive Survey</h1>
+    <form id="surveyForm" action="https://httpbin.org/post" method="POST">
+        <fieldset>
+            <legend>User Information</legend>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+            <span class="error-message" id="nameError"></span>
 
-        <!-- Radio Buttons for Exercise Frequency -->
-        <label>How often do you exercise?</label>
-        <label><input type="radio" name="exercise" value="daily" required> Daily</label>
-        <label><input type="radio" name="exercise" value="weekly"> Weekly</label>
-        <label><input type="radio" name="exercise" value="rarely"> Rarely</label>
-        <label><input type="radio" name="exercise" value="never"> Never</label>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+            <span class="error-message" id="emailError"></span>
 
-        <!-- Checkbox for Healthy Eating Habits -->
-        <label>What healthy eating habits do you follow? (Select all that apply)</label>
-        <label><input type="checkbox" name="healthyEating" value="fruits"> Eating Fruits</label>
-        <label><input type="checkbox" name="healthyEating" value="vegetables"> Eating Vegetables</label>
-        <label><input type="checkbox" name="healthyEating" value="water"> Drinking Water</label>
-        <label><input type="checkbox" name="healthyEating" value="junkFood"> Avoiding Junk Food</label>
+            <label>Favorite Color:</label>
+            <input type="radio" id="colorRed" name="color" value="Red">
+            <label for="colorRed">Red</label>
+            <input type="radio" id="colorGreen" name="color" value="Green">
+            <label for="colorGreen">Green</label>
+            <span class="error-message" id="colorError"></span>
 
-        <!-- Dropdown for Preferred Workout Type -->
-        <label for="workoutType">Preferred Workout Type:</label>
-        <select id="workoutType" name="workoutType" required>
-            <option value="" disabled selected>Select your workout type</option>
-            <option value="cardio">Cardio</option>
-            <option value="strength">Strength Training</option>
-            <option value="yoga">Yoga</option>
-            <option value="dance">Dance</option>
-            <option value="other">Other</option>
-        </select>
+            <label for="options">Choose your interests:</label>
+            <select id="options" name="interests">
+                <option value="">Select an option</option>
+                <option value="music">Music</option>
+                <option value="sports">Sports</option>
+                <option value="art">Art</option>
+            </select>
+            <span class="error-message" id="selectError"></span>
 
-        <!-- Username Field with Regex Validation -->
-        <label for="username">Username (alphanumeric only):</label>
-        <input type="text" id="username" name="username" pattern="^[a-zA-Z0-9]+$" required>
-        <div class="error" id="usernameError"></div>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" required>
+            <span class="error-message" id="usernameError"></span>
 
-        <!-- Date Input for Date of Birth -->
-        <label for="dob">Date of Birth (DD-MM-YYYY):</label>
-        <input type="text" id="dob" name="dob" pattern="^\d{2}-\d{2}-\d{4}$" required>
-        <div class="error" id="dobError"></div>
+            <label for="customId">Custom ID (ABC-1234):</label>
+            <input type="text" id="customId" name="customId" required>
+            <span class="error-message" id="customIdError"></span>
 
-        <!-- Custom Code Field -->
-        <label for="customCode">Custom Code (Format: ABC-1234):</label>
-        <input type="text" id="customCode" name="customCode" pattern="^[A-Z]{3}-\d{4}$" required>
-        <div class="error" id="codeError"></div>
-
-        <!-- Date Picker -->
-        <label for="exerciseDate">When did you last exercise?</label>
-        <input type="date" id="exerciseDate" name="exerciseDate">
-
-        <!-- Number Input for Weekly Water Intake -->
-        <label for="waterIntake">Weekly Water Intake (in liters):</label>
-        <input type="number" id="waterIntake" name="waterIntake" min="0" required>
-
-        <!-- Text Area for Additional Comments -->
-        <label for="comments">Any additional comments or suggestions:</label>
-        <textarea id="comments" name="comments" rows="4" cols="50"></textarea>
-
-        <button type="submit">Submit</button>
+            <button type="submit">Submit</button>
+        </fieldset>
     </form>
-
-    <script>
-        document.getElementById("surveyForm").addEventListener("submit", function(event) {
-            let valid = true;
-
-            // Validate username
-            const username = document.getElementById("username").value;
-            const usernameError = document.getElementById("usernameError");
-            usernameError.textContent = ""; // Clear previous error
-            if (!/^[a-zA-Z0-9]+$/.test(username)) {
-                usernameError.textContent = "Username must be alphanumeric.";
-                valid = false;
-            }
-
-            // Validate date of birth
-            const dob = document.getElementById("dob").value;
-            const dobError = document.getElementById("dobError");
-            dobError.textContent = ""; // Clear previous error
-            if (!/^\d{2}-\d{2}-\d{4}$/.test(dob)) {
-                dobError.textContent = "Date must be in DD-MM-YYYY format.";
-                valid = false;
-            }
-
-            // Validate custom code
-            const customCode = document.getElementById("customCode").value;
-            const codeError = document.getElementById("codeError");
-            codeError.textContent = ""; // Clear previous error
-            if (!/^[A-Z]{3}-\d{4}$/.test(customCode)) {
-                codeError.textContent = "Custom code must be in the format ABC-1234.";
-                valid = false;
-            }
-
-            if (!valid) {
-                event.preventDefault(); // Prevent form submission if validation fails
-            }
-        });
-    </script>
+    
+    <script src="script.js"></script>
 </body>
 </html>
+
