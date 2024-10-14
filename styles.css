@@ -1,0 +1,26 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+fieldset {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+legend {
+    font-weight: bold;
+}
+label {
+    display: block;
+    margin-bottom: 8px;
+}
+.error {
+    color: red;
+    font-size: 0.9em;
+}
+button {
+    padding: 10px 15px;
+    font-size: 1em;
+    cursor: pointer;
+}
+       
