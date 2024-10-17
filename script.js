@@ -4,7 +4,7 @@ document.getElementById('surveyForm').addEventListener('submit', function(event)
 
     let isValid = true; // Flag to track overall validity
 
-    // Validate each field
+// Validate each field
     if (!isNotEmpty('name')) isValid = false;
     if (!isValidEmail('email')) isValid = false;
     if (!hasCheckedOption('color')) isValid = false;
