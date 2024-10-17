@@ -3,51 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive Survey</title>
+    <title>Restaurant Survey</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>Interactive Survey</h1>
-    <form id="surveyForm" action="https://httpbin.org/post" method="POST">
-        <fieldset>
-            <legend>User Information</legend>
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="name" required>
-            <span class="error-message" id="nameError"></span>
+    <div class="container">
+        <h1>Restaurant Survey</h1>
+        <form id="surveyForm" action="https://httpbin.org/post" method="POST">
+            <fieldset>
+                <legend>User Information</legend>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <span class="error" id="nameError"></span>
 
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
-            <span class="error-message" id="emailError"></span>
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+                <span class="error" id="emailError"></span>
 
-            <label>Favorite Color:</label>
-            <input type="radio" id="colorRed" name="color" value="Red">
-            <label for="colorRed">Red</label>
-            <input type="radio" id="colorGreen" name="color" value="Green">
-            <label for="colorGreen">Green</label>
-            <span class="error-message" id="colorError"></span>
+                <label>How did you hear about us?</label>
+                <div>
+                    <input type="radio" id="friend" name="source" value="Friend">
+                    <label for="friend">Friend</label>
+                    <input type="radio" id="internet" name="source" value="Internet">
+                    <label for="internet">Internet</label>
+                    <input type="radio" id="advertisement" name="source" value="Advertisement">
+                    <label for="advertisement">Advertisement</label>
+                </div>
+                <span class="error" id="sourceError"></span>
 
-            <label for="options">Choose your interests:</label>
-            <select id="options" name="interests">
-                <option value="">Select an option</option>
-                <option value="music">Music</option>
-                <option value="sports">Sports</option>
-                <option value="art">Art</option>
-            </select>
-            <span class="error-message" id="selectError"></span>
+                <label>What do you like about our restaurant? (Select all that apply)</label>
+                <div>
+                    <input type="checkbox" id="food" name="like" value="Food">
+                    <label for="food">Food</label>
+                    <input type="checkbox" id="service" name="like" value="Service">
+                    <label for="service">Service</label>
+                    <input type="checkbox" id="ambiance" name="like" value="Ambiance">
+                    <label for="ambiance">Ambiance</label>
+                </div>
 
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username" required>
-            <span class="error-message" id="usernameError"></span>
+                <label for="experience">Rate your experience:</label>
+                <select id="experience" name="experience" required>
+                    <option value="">--Select--</option>
+                    <option value="Excellent">Excellent</option>
+                    <option value="Good">Good</option>
+                    <option value="Average">Average</option>
+                    <option value="Poor">Poor</option>
+                </select>
+                <span class="error" id="experienceError"></span>
 
-            <label for="customId">Custom ID (ABC-1234):</label>
-            <input type="text" id="customId" name="customId" required>
-            <span class="error-message" id="customIdError"></span>
+                <label for="username">Username (alphanumeric only):</label>
+                <input type="text" id="username" name="username" required pattern="[a-zA-Z0-9]+" title="Only alphanumeric characters are allowed.">
+                <span class="error" id="usernameError"></span>
 
-            <button type="submit">Submit</button>
-        </fieldset>
-    </form>
-    
+                <label for="date">Date of Visit (DD-MM-YYYY):</label>
+                <input type="text" id="date" name="date" required placeholder="DD-MM-YYYY">
+                <span class="error" id="dateError"></span>
+
+                <label for="customCode">Custom Code (Format: ABC-1234):</label>
+                <input type="text" id="customCode" name="customCode" required pattern="[A-Z]{3}-[0-9]{4}" title="Format: ABC-1234">
+                <span class="error" id="customCodeError"></span>
+
+                <label for="comments">Additional Comments:</label>
+                <textarea id="comments" name="comments" rows="4" cols="50"></textarea>
+
+                <input type="submit" value="Submit">
+            </fieldset>
+        </form>
+        <div id="formStatus"></div>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>
-

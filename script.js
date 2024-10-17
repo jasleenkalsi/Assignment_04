@@ -1,24 +1,36 @@
 document.getElementById('surveyForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Prevent default form submission
-    clearErrors(); // Clear any previous error messages
+    event.preventDefault(); // Prevent form submission
 
-    let isValid = true; // Flag to track overall validity
+    // Clear previous error messages
+    clearErrors();
 
-// Validate each field
-    if (!isNotEmpty('name')) isValid = false;
-    if (!isValidEmail('email')) isValid = false;
-    if (!hasCheckedOption('color')) isValid = false;
-    if (!isSelected('options')) isValid = false;
-    if (!isValidUsername('username')) isValid = false;
-    if (!isValidCustomId('customId')) isValid = false;
+    // Validate fields
+    let isValid = true;
 
-    // If all validations pass, submit the form
+    if (!isNotEmpty('name')) {
+        isValid = false;
+    }
+    if (!isValidEmail('email')) {
+        isValid = false;
+    }
+    if (!isNotEmpty('username')) {
+        isValid = false;
+    }
+    if (!hasCheckedOption('source')) {
+        isValid = false;
+    }
+    if (!isValidDate('visitDate')) {
+        isValid = false;
+    }
+
+    // If valid, show success message and submit the form
     if (isValid) {
+        document.getElementById('successMessage').innerText = 'Thank you for your feedback!';
+        // Submit the form
         this.submit();
     }
 });
 
-// Function to check if an input is not empty
 function isNotEmpty(fieldId) {
     const field = document.getElementById(fieldId);
     if (field.value.trim() === '') {
@@ -28,69 +40,43 @@ function isNotEmpty(fieldId) {
     return true;
 }
 
-// Function to validate email format
 function isValidEmail(fieldId) {
     const field = document.getElementById(fieldId);
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(field.value)) {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!regex.test(field.value.trim())) {
         showError(fieldId, 'Please enter a valid email address.');
         return false;
     }
     return true;
 }
 
-// Function to check if a radio button is selected
 function hasCheckedOption(groupName) {
-    const radios = document.getElementsByName(groupName);
-    for (let radio of radios) {
-        if (radio.checked) {
+    const options = document.getElementsByName(groupName);
+    for (let option of options) {
+        if (option.checked) {
             return true;
         }
     }
-    showError('colorError', 'Please select a color.');
+    showError('sourceError', 'Please select one option.');
     return false;
 }
 
-// Function to check if a dropdown option is selected
-function isSelected(selectId) {
-    const select = document.getElementById(selectId);
-    if (select.value === '') {
-        showError(selectId, 'Please select an option.');
-        return false;
-    }
-    return true;
-}
-
-// Function to validate username format (alphanumeric)
-function isValidUsername(fieldId) {
+function isValidDate(fieldId) {
     const field = document.getElementById(fieldId);
-    const usernameRegex = /^[a-zA-Z0-9]+$/; // Example regex for alphanumeric
-    if (!usernameRegex.test(field.value)) {
-        showError(fieldId, 'Username must be alphanumeric.');
+    const regex = /^(0[1-9]|[12][0-9]|3[01])-(0[1-9]|1[0-2])-\d{4}$/;
+    if (!regex.test(field.value.trim())) {
+        showError(fieldId, 'Please enter a valid date in DD-MM-YYYY format.');
         return false;
     }
     return true;
 }
 
-// Function to validate custom ID format (ABC-1234)
-function isValidCustomId(fieldId) {
-    const field = document.getElementById(fieldId);
-    const customIdRegex = /^[A-Z]{3}-\d{4}$/; // Example regex for format
-    if (!customIdRegex.test(field.value)) {
-        showError(fieldId, 'Custom ID must be in the format ABC-1234.');
-        return false;
-    }
-    return true;
-}
-
-// Function to display error messages
 function showError(fieldId, message) {
-    const errorField = document.getElementById(fieldId + 'Error');
-    errorField.textContent = message;
+    const errorSpan = document.getElementById(fieldId + 'Error');
+    errorSpan.innerText = message;
 }
 
-// Function to clear error messages
 function clearErrors() {
-    const errorMessages = document.querySelectorAll('.error-message');
-    errorMessages.forEach(message => message.textContent = '');
+    const errorSpans = document.querySelectorAll('.error-message');
+    errorSpans.forEach(span => span.innerText = '');
 }
